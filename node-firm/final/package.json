@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "slugify": "^1.4.6"
+    "slugify": "~1.4.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
