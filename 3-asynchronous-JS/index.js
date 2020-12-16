@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { resolve } = require('path');
+const { get } = require('superagent');
 const superagent = require('superagent');
 
 // callback
@@ -68,7 +69,28 @@ const getDogPic = async () => {
     console.log('Random dog image saved to file!');
   } catch (err) {
     console.log(err);
+    throw err; // must throw, so reject can be catched
   }
+  return '2: READY'; // treat as Promise automatically
 };
 
-getDogPic();
+// console.log('1: Will get dog pics!');
+// getDogPic()
+//   .then((x) => {
+//     console.log(x);
+//     console.log('3: Done getting dog pics!');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+(async () => {
+  try {
+    console.log('1: Will get dog pics!');
+    const x = await getDogPic();
+    console.log(x);
+    console.log('3: Done getting dog pics!');
+  } catch (err) {
+    console.log(err);
+  }
+})();
