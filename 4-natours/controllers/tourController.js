@@ -3,17 +3,17 @@ const Tour = require('../models/tourModel');
 exports.getAllTours = async (req, res) => {
   try {
     // Build Query
-    const queryObj = { ...req.query };
+    // 1) Filtering
+    let queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
+    // Advanced Filtering
+    // gte, gt, lte, lt
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    queryObj = JSON.parse(queryStr);
     const query = Tour.find(queryObj);
-
-    // const query = Tour.find()
-    //   .where('duration')
-    //   .equals(req.query.duration * 1)
-    //   .where('difficulty')
-    //   .equals(req.query.difficulty);
 
     // Execute Query
     const tours = await query;
