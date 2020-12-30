@@ -17,10 +17,12 @@ exports.getOverView = catchAsync(async (req, res, next) => {
 
 exports.getTour = catchAsync(async (req, res) => {
   // 1) Get the data for the requested tour (including reviews and guides)
-  const tour = await (await Tour.findOne({ slug: req.params.slug })).populate({
+  const tour = await Tour.findOne({ slug: req.params.slug }).populate({
     path: 'reviews',
     fields: 'review rating user',
   });
+
+  console.log(tour);
 
   res.status(200).render('tour', {
     title: 'The Forest Hiker Tour',
