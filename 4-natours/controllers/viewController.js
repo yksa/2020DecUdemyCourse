@@ -22,10 +22,8 @@ exports.getTour = catchAsync(async (req, res) => {
     fields: 'review rating user',
   });
 
-  console.log(tour);
-
   res.status(200).render('tour', {
-    title: 'The Forest Hiker Tour',
+    title: `${tour.name} Tour`,
     tour,
   });
 });
