@@ -9020,6 +9020,7 @@ if (mapBox) {
 
 if (loginForm) {
   loginForm.addEventListener('submit', function (e) {
+    alert('## index ##');
     e.preventDefault();
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
